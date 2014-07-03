@@ -1,0 +1,49 @@
+# standlone mode
+<% if scope.lookupvar('vsftpd::bool_listen') -%>
+listen=<%= scope.lookupvar('vsftpd::listen') %>
+listen_port=<%= scope.lookupvar('vsftpd::listen_port') %>
+# ipv6
+listen_ipv6=<%= scope.lookupvar('vsftpd::listen_ipv6') %>
+<% end-%>
+
+# passive mode
+<% if scope.lookupvar('vsftpd::bool_passive') -%>
+pasv_max_port=<%= scope.lookupvar('vsftpd::pasv_max_port') %>
+pasv_min_port=<%= scope.lookupvar('vsftpd::pasv_min_port') %>
+<% if nil != scope.lookupvar('vsftpd::pasv_address') -%>
+pasv_address=<%= scope.lookupvar('vsftpd::pasv_address') %>
+<% end -%>
+<% else -%>
+connect_from_port_20=<%= scope.lookupvar('vsftpd::connect_from_port_20') %>
+<% end -%>
+
+# default root
+anon_root=<%= scope.lookupvar('vsftpd::anon_root') %>
+local_root=<%= scope.lookupvar('vsftpd::local_root') %>
+
+# chroot
+<% if scope.lookupvar('vsftpd::bool_chroot') -%>
+chroot_local_user=<%= scope.lookupvar('vsftpd::chroot_local_user') %>
+secure_chroot_dir=<%= scope.lookupvar('vsftpd::secure_chroot_dir') %>
+<% end -%>
+
+# Anonymous FTP parameters
+# anonymous_enable=<%= scope.lookupvar('vsftpd::anonymous_enable') %>
+# anon_upload_enable=<%= scope.lookupvar('vsftpd::anon_upload_enable') %>
+# anon_mkdir_write_enable=<%= scope.lookupvar('vsftpd::anon_mkdir_write_enable') %>
+# anon_other_write_enable=<%= scope.lookupvar('vsftpd::anon_other_write_enable') %>
+
+# Local users parameters
+<% if scope.lookupvar('vsftpd::bool_vuser') -%>
+local_enable=<%= scope.lookupvar('vsftpd::local_enable') %>
+guest_enable=<%= scope.lookupvar('vsftpd::guest_enable') %>
+guest_username=<%= scope.lookupvar('vsftpd::guest_username') %>
+pam_service_name=<%= scope.lookupvar('vsftpd::pam_service_name') %>
+user_config_dir=<%= scope.lookupvar('vsftpd::main_config_dir') %>/<%= scope.lookupvar('vsftpd::user_config_dir') %>
+anon_umask=<%= scope.lookupvar('vsftpd::anon_umask') %>
+<% end -%>
+
+<% if scope.lookupvar('vsftpd::bool_log') -%>
+xferlog_enable=<%= scope.lookupvar('vsftpd::xferlog_enable') %>
+vsftpd_log_file=<%= scope.lookupvar('vsftpd::vsftpd_log_file') %>
+<% end -%>
